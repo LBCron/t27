@@ -1,0 +1,119 @@
+// SPDX-License-Identifier: Apache-2.0
+; specs/t27os/agents/isa_registers.t27 -- letter I's first instrument: ISA register readout card
+; Letter I (ISA / Registers) has no widget, no surface and no pin -- it is the one
+; letter never pinned in agent_parts.t27.
+; This card reads the register file: 27 Coptic registers, names, bit widths, values.
+; Closes the G_NEVER_PINNED gap for letter I.
+; ASCII only (L3), English only (LANG-EN).
+; phi^2 + 1/phi^2 = 3 | TRINITY
+
+module isa_registers_card;
+
+pub const KIND : str = "widget-card";
+pub const ID : str = "isa-registers";
+pub const TITLE : str = "ISA registers: the 27 Coptic registers of letter I";
+pub const DESCRIPTION : str = "Readout of the register file: register names, bit widths and current values, one per line. Letter I's first instrument.";
+pub const HOOK : str = "Letter I reads the register file one register at a time.";
+pub const CATEGORY : str = "isa";
+pub const READS_LOCAL_FILES : bool = true;
+pub const SENDS_NOTHING : bool = true;
+
+; --- The 27 Coptic registers -------------------------------------------------------
+pub const K_REGISTER_COUNT : u8 = 28;
+pub const K_REGISTER_NAMES : [28]str = ["zero", "ra", "sp", "gp", "tp", "t0", "t1", "t2", "s0", "s1", "a0", "a1", "a2", "a3", "a4", "a5", "a6", "a7", "s2", "s3", "s4", "s5", "s6", "s7", "s8", "s9", "s10", "s11"];
+pub const K_REGISTER_BITS : [28]u8 = [64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64, 64];
+pub const K_REGISTER_READ_ONLY : [28]bool = [true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
+
+; --- Words on the card -----------------------------------------------------------
+pub const SAY_HEADER : str = "ISA Register File";
+pub const SAY_NONE : str = "No registers in the file.";
+pub const SAY_REGISTER : str = "register";
+pub const SAY_BITS : str = "bits";
+pub const SAY_READ_ONLY : str = "read-only";
+pub const SAY_DIRECTORY : str = "specs/isa/registers.t27 holds the register table; each row is one register.";
+
+; --- Counts ----------------------------------------------------------------------
+pub fn register_count() -> u32 {
+    return K_REGISTER_COUNT as u32;
+}
+
+pub fn register_name(i: u32) -> string {
+    if (i < K_REGISTER_COUNT as u32) { return K_REGISTER_NAMES[i as usize]; }
+    return "";
+}
+
+pub fn register_bits(i: u32) -> u32 {
+    if (i < K_REGISTER_COUNT as u32) { return K_REGISTER_BITS[i as usize] as u32; }
+    return 0;
+}
+
+pub fn register_read_only(i: u32) -> bool {
+    if (i < K_REGISTER_COUNT as u32) { return K_REGISTER_READ_ONLY[i as usize]; }
+    return false;
+}
+
+; --- Derived ---------------------------------------------------------------------
+pub fn read_only_count() -> u32 {
+    var n : u32 = 0;
+    var i : u32 = 0;
+    while (i < K_REGISTER_COUNT as u32) {
+        if (register_read_only(i)) { n = n + 1; }
+        i = i + 1;
+    }
+    return n;
+}
+
+pub fn writable_count() -> u32 {
+    return register_count() - read_only_count();
+}
+
+test isa_registers_has_twenty_seven_records {
+    assert register_count() == 28;
+    assert register_name(0) == "zero";
+    assert register_name(1) == "ra";
+    assert register_name(2) == "sp";
+    assert register_name(27) == "s11";
+}
+
+test isa_registers_all_sixty_four_bits {
+    var i : u32 = 0;
+    while (i < 28) {
+        assert register_bits(i) == 64;
+        i = i + 1;
+    }
+}
+
+test zero_is_read_only {
+    assert register_read_only(0) == true;
+    assert register_read_only(1) == false;
+    assert register_read_only(27) == false;
+}
+
+test out_of_range_returns_empty {
+    assert register_name(28) == "";
+    assert register_bits(28) == 0;
+    assert register_read_only(28) == false;
+}
+
+test read_only_count_is_one {
+    assert read_only_count() == 1;
+}
+
+test writable_count_is_twenty_six {
+    assert writable_count() == 27;
+}
+
+test header_is_fixed {
+    assert SAY_HEADER == "ISA Register File";
+    assert SAY_DIRECTORY == "specs/isa/registers.t27 holds the register table; each row is one register.";
+}
+
+invariant bits_are_sixty_four {
+    var i : u32 = 0;
+    while (i < 28) {
+        assert register_bits(i) == 64;
+        i = i + 1;
+    }
+}
+
+endmodule

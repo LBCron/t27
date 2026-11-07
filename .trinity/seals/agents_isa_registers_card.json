@@ -1,0 +1,28 @@
+{
+  "built_by": "t27c-bootstrap@0.5.2+f1fb27891",
+  "closure": [],
+  "config": "gen=c,rust,verilog,zig;tests=zig",
+  "gen_hash_c": "sha256:a060410bccf8ff50b6766a2537c2596ec5d3c84f8cfcd8bbf4805d88bab8c8c6",
+  "gen_hash_rust": "sha256:15b3c5d344fdce1b76ad54c8f4a58aa087d826bb78419610678363aa70876c24",
+  "gen_hash_verilog": "sha256:ecc9668af8b60622a55b3c0543fc740d9ed5f965626e3f602139bc32657eaf7d",
+  "gen_hash_zig": "sha256:15c3aeb1ce931ca9fa197542ae1f6e596c733a32b291b2823616721e0fc8c279",
+  "module": "isa_registers_card",
+  "ring": 12,
+  "seal_schema": 2,
+  "sealed_at": "2026-11-07T20:49:26Z",
+  "sealed_by": "t27c-bootstrap@0.5.2",
+  "spec_hash": "sha256:8743d9fa9fee542d7d47e91b53bf452eb671e6e87099ceed66cf88c87423b303",
+  "spec_path": "specs/t27os/agents/isa_registers.t27",
+  "tests": {
+    "failed": 0,
+    "failing": [],
+    "forced": false,
+    "passed": 7,
+    "total": 7,
+    "vacuous": 0
+  },
+  "toolchain": {
+    "test_runner": "sha256:1a50286d6170ef41c779d26385a1be59823925d7131497c93d84194144ba93b3",
+    "zig": "0.16.0"
+  }
+}
