@@ -65,11 +65,11 @@
 //! have no file on `master` at all, and a workflow that is not on the default
 //! branch does not gate the default branch. `Fetch` keeps that apart from a
 //! failure to reach any answer.
-
 use anyhow::{Context, Result};
 use clap::Subcommand;
 use std::process::Command;
-
+#[allow(dead_code, unused_parens)]
+pub use crate::cibase_rules::*;
 #[derive(Subcommand)]
 pub enum CiCmd {
     /// List PR gates that have never run on the default branch.

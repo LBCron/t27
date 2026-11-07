@@ -18,11 +18,11 @@
 //!
 //! `if` is in the sentence and not in the pattern. That is a diff, not a
 //! judgement, and this is the command that takes it.
-
 use anyhow::Result;
 use clap::Subcommand;
 use std::path::PathBuf;
-
+#[allow(dead_code, unused_parens)]
+pub use crate::kinddrift_rules::*;
 #[derive(Subcommand)]
 pub enum KindsCmd {
     /// Match arms whose comment names a construct the pattern does not cover.
@@ -32,7 +32,6 @@ pub enum KindsCmd {
         file: Option<PathBuf>,
     },
 }
-
 /// The constructs a comment can name, and the NodeKind spelling each implies.
 ///
 /// Deliberately short. A long list matches prose -- "if you want to..." is not

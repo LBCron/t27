@@ -2,7 +2,8 @@ use anyhow::{Context, Result};
 use clap::Subcommand;
 use std::collections::{BTreeMap, BTreeSet};
 use std::path::PathBuf;
-
+#[allow(dead_code, unused_parens)]
+pub use crate::quant_rules::*;
 #[derive(Subcommand)]
 pub enum QuantCmd {
     /// Every quantified clause, its binders, and the size of its domain.
@@ -36,7 +37,6 @@ pub enum QuantCmd {
     /// clause belongs in, `no binder this can read`, was one short.
     Audit,
 }
-
 /// What the type of one binder is worth.
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
 enum Size {

@@ -2,10 +2,10 @@ use anyhow::{Context, Result};
 use clap::Subcommand;
 use std::collections::{BTreeMap, BTreeSet};
 use std::process::Command;
-
+#[allow(dead_code, unused_parens)]
+pub use crate::prcheck_rules::*;
 #[path = "../../../gen/rust/tri/pr/preflight.rs"] #[allow(dead_code, unused_parens, unused_mut, unused_variables, non_snake_case, unused_assignments, clippy::all)]
 mod pf; // t27c gen-rust of specs/tri/pr/preflight.t27 (#10190, #11125): every rule of `tri pr preflight`
-
 #[derive(Subcommand)]
 pub enum PrCmd {
     /// Classify every failing check and say plainly whether it is safe to merge.

@@ -2,7 +2,8 @@ use anyhow::{Context, Result};
 use clap::Subcommand;
 use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
-
+#[allow(dead_code, unused_parens)]
+pub use crate::skillnum_rules::*;
 #[derive(Subcommand)]
 pub enum SkillCmd {
     /// Write a new lesson to the spool, unnumbered.
@@ -96,7 +97,6 @@ pub enum SkillCmd {
         windowed: bool,
     },
 }
-
 fn repo_root() -> Result<PathBuf> {
     let out = std::process::Command::new("git")
         .args(["rev-parse", "--show-toplevel"])
@@ -107,7 +107,6 @@ fn repo_root() -> Result<PathBuf> {
     }
     Ok(PathBuf::from(String::from_utf8(out.stdout)?.trim()))
 }
-
 /// `## 179. Title` -> (179, "Title"). Anything else is not a numbered section.
 pub fn sections(text: &str) -> Vec<(usize, String)> {
     let mut out = Vec::new();

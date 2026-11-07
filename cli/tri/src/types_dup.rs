@@ -2,7 +2,8 @@ use anyhow::{Context, Result};
 use clap::Subcommand;
 use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
-
+#[allow(dead_code, unused_parens)]
+pub use crate::types_dup_rules::*;
 #[derive(Subcommand)]
 pub enum TypesCmd {
     /// Type names with more than one definition in the spec tree.
@@ -59,10 +60,8 @@ pub enum TypesCmd {
         probe: bool,
     },
 }
-
 /// Where the conflicted set is pinned.
 const LEDGER: &str = "docs/reports/type_conflicts.json";
-
 /// Where each conflicted name's verdict and the reading behind it are written.
 const CLASSIFICATION: &str = "docs/reports/type_conflicts_classified.json";
 

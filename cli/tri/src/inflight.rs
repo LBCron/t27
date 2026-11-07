@@ -31,11 +31,11 @@
 //!
 //! Everything here is local and read-only. It answers three questions and says
 //! which one it could not answer rather than guessing.
-
 use anyhow::{Context, Result};
 use clap::Args;
 use std::process::Command;
-
+#[allow(dead_code, unused_parens)]
+pub use crate::inflight_rules::*;
 /// How many parents `git log -1 --format=%p` reported.
 ///
 /// The root commit prints an empty line, which is zero parents and not a
@@ -44,7 +44,6 @@ use std::process::Command;
 pub fn parent_count(porcelain: &str) -> usize {
     porcelain.split_whitespace().count()
 }
-
 /// Does this subject claim to be a merge?
 ///
 /// "Merge" must be its own word at the start. `Merged` and `Merger` are other

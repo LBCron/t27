@@ -19,11 +19,11 @@
 //! does not support a confident action it says `inspect <n>` rather than
 //! guessing, for the same reason `tri pr ready` refuses to guess: an unread
 //! state is what this command exists to prevent.
-
 use anyhow::{Context, Result};
 use serde::Deserialize;
 use std::process::Command;
-
+#[allow(dead_code, unused_parens)]
+pub use crate::night_rules::*;
 #[derive(Deserialize)]
 struct NightState {
     #[serde(default)]
@@ -31,7 +31,6 @@ struct NightState {
     #[serde(default)]
     parked: std::collections::BTreeMap<u64, String>,
 }
-
 /// What mergeStateStatus means for the train, in one word an operator can act on.
 fn action_for(state: &str) -> &'static str {
     match state {
