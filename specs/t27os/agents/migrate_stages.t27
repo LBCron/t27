@@ -1,0 +1,121 @@
+// SPDX-License-Identifier: Apache-2.0
+; specs/t27os/agents/migrate_stages.t27 -- letter D's first instrument: migration stages card
+; Letter D (De-Zig Migration) has no widget, no surface and no pin.
+; This card lists the compiler stages of t27c and their migration state as letter D's first widget.
+; Closes the G_NO_INSTRUMENT gap for letter D.
+; ASCII only (L3), English only (LANG-EN).
+; phi^2 + 1/phi^2 = 3 | TRINITY
+
+module migrate_stages_card;
+
+pub const KIND : str = "widget-card";
+pub const ID : str = "migrate-stages";
+pub const TITLE : str = "Migration stages: t27c pipeline on a Zig-free tree";
+pub const DESCRIPTION : str = "The six stages of t27c (lex, parse, typecheck, optimize, codegen, link) with the migration state of each one: still in Zig, ported to t27, or self-hosting. Letter D's first instrument.";
+pub const HOOK : str = "Letter D measures the de-Zig migration stage by stage.";
+pub const CATEGORY : str = "migration";
+pub const READS_LOCAL_FILES : bool = true;
+pub const SENDS_NOTHING : bool = true;
+
+; --- The six t27c compiler stages ------------------------------------------------
+pub const K_STAGE_COUNT : u8 = 6;
+pub const K_STAGE_NAMES : [6]str = ["lex", "parse", "typecheck", "optimize", "codegen", "link"];
+pub const K_STAGE_STATE : [6]str = ["ported", "ported", "ported", "ported", "in zig", "in zig"];
+pub const K_STAGE_FILES : [6]u32 = [0, 0, 0, 0, 247, 31];
+
+; --- Words on the card -----------------------------------------------------------
+pub const SAY_HEADER : str = "De-Zig migration: t27c compiler stages";
+pub const SAY_NONE : str = "No stages recorded.";
+pub const SAY_STAGE : str = "stage";
+pub const SAY_STATE : str = "migration state";
+pub const SAY_FILES : str = "files still in Zig";
+pub const SAY_DIRECTORY : str = "specs/compiler/ holds the stages; each stage is one spec.";
+
+; --- Counts ----------------------------------------------------------------------
+pub fn stage_count() -> u32 {
+    return K_STAGE_COUNT as u32;
+}
+
+pub fn stage_name(i: u32) -> string {
+    if (i < K_STAGE_COUNT as u32) { return K_STAGE_NAMES[i as usize]; }
+    return "";
+}
+
+pub fn stage_state(i: u32) -> string {
+    if (i < K_STAGE_COUNT as u32) { return K_STAGE_STATE[i as usize]; }
+    return "";
+}
+
+pub fn stage_files(i: u32) -> u32 {
+    if (i < K_STAGE_COUNT as u32) { return K_STAGE_FILES[i as usize]; }
+    return 0;
+}
+
+; --- Derived ---------------------------------------------------------------------
+pub fn migrated_count() -> u32 {
+    var n : u32 = 0;
+    var i : u32 = 0;
+    while (i < K_STAGE_COUNT as u32) {
+        if (stage_state(i) == "ported") { n = n + 1; }
+        i = i + 1;
+    }
+    return n;
+}
+
+pub fn total_files_in_zig() -> u32 {
+    var n : u32 = 0;
+    var i : u32 = 0;
+    while (i < K_STAGE_COUNT as u32) {
+        n = n + stage_files(i);
+        i = i + 1;
+    }
+    return n;
+}
+
+test migrate_stages_has_six_records {
+    assert stage_count() == 6;
+    assert stage_name(0) == "lex";
+    assert stage_name(1) == "parse";
+    assert stage_name(2) == "typecheck";
+    assert stage_name(3) == "optimize";
+    assert stage_name(4) == "codegen";
+    assert stage_name(5) == "link";
+}
+
+test migrate_stages_state_matches {
+    assert stage_state(0) == "ported";
+    assert stage_state(1) == "ported";
+    assert stage_state(2) == "ported";
+    assert stage_state(3) == "ported";
+    assert stage_state(4) == "in zig";
+    assert stage_state(5) == "in zig";
+}
+
+test out_of_range_returns_empty {
+    assert stage_name(6) == "";
+    assert stage_state(6) == "";
+    assert stage_files(6) == 0;
+}
+
+test migrated_count_is_four {
+    assert migrated_count() == 4;
+}
+
+test total_files_in_zig_is_278 {
+    assert total_files_in_zig() == 278;
+}
+
+test header_is_fixed {
+    assert SAY_HEADER == "De-Zig migration: t27c compiler stages";
+    assert SAY_DIRECTORY == "specs/compiler/ holds the stages; each stage is one spec.";
+}
+
+invariant states_are_ported_or_in_zig {
+    var i : u32 = 0;
+    while (i < K_STAGE_COUNT as u32) {
+        assert stage_state(i) == "ported" or stage_state(i) == "in zig";
+        i = i + 1;
+    }
+}
+
+endmodule
