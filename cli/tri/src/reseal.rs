@@ -24,9 +24,10 @@
 use anyhow::{Context, Result};
 use clap::Subcommand;
 use sha2::{Digest, Sha256};
+#[allow(dead_code, unused_parens)]
+pub use crate::reseal_rules::*;
 #[path = "../../../gen/rust/tri/reseal/seal.rs"] #[allow(dead_code, unused_parens)]
 mod rs; // t27c gen-rust of specs/tri/reseal/seal.t27
-
 #[derive(Subcommand)]
 pub enum ResealCmd {
     /// Rewrite FROZEN_HASH from the current bytes of the sealed file.
@@ -34,7 +35,6 @@ pub enum ResealCmd {
     /// Report whether the seal matches, and exit non-zero if it does not.
     Check,
 }
-
 pub fn run(cmd: &ResealCmd) -> Result<()> {
     let out = std::process::Command::new("git").args(["rev-parse", "--show-toplevel"]).output().context("running `git rev-parse --show-toplevel`")?;
     anyhow::ensure!(out.status.success(), "not inside a git repository");

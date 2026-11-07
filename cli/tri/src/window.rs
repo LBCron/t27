@@ -2,6 +2,8 @@ use anyhow::{Context, Result};
 use clap::Parser;
 use std::path::PathBuf;
 use std::process::{Command, Stdio};
+#[allow(dead_code, unused_parens)]
+pub use crate::window_rules::*;
 
 #[derive(Parser, Debug)]
 /// Record the base a measurement starts from, and check it is still the tip.
@@ -19,7 +21,6 @@ pub struct Window {
     #[arg(long)]
     pub self_check: bool,
 }
-
 /// The first twelve characters, or all of them. A record file holding three bytes made
 /// `--check` PANIC at `short(&recorded)` -- exit 101 with a byte-index message, which is
 /// the least useful thing a guard can say about a record it could not use.
@@ -30,7 +31,6 @@ fn short(sha: &str) -> &str {
         sha
     }
 }
-
 fn repo_root() -> Result<PathBuf> {
     let out = Command::new("git")
         .args(["rev-parse", "--show-toplevel"])

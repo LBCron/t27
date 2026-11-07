@@ -32,7 +32,7 @@ mod misread;
 mod night;
 #[path = "../../../gen/rust/tri/oneaway/oneaway.rs"] #[allow(dead_code, unused_parens)] mod oneaway_rules; mod oneaway; // t27c gen-rust + thin I/O glue
 #[path = "../../../gen/rust/tri/network/payout.rs"] #[allow(dead_code, unused_parens)] mod payout_rules; mod payout; // t27c gen-rust of specs/verified/payout.t27
-mod window;
+#[path = "../../../gen/rust/tri/window/window.rs"] #[allow(dead_code, unused_parens)] mod window_rules; mod window; // t27c gen-rust of specs/tools/tri/window.t27
 mod modreach;
 #[path = "../../../gen/rust/tri/mutate/mutate.rs"] #[allow(dead_code, unused_parens)] mod mutate_rules; mod mutate; // t27c gen-rust of specs/tools/tri/mutate.t27
 #[path = "../../../gen/rust/tri/nownote/nownote.rs"] #[allow(dead_code, unused_parens)] mod nownote_rules; mod nownote; // t27c gen-rust + thin I/O glue
@@ -78,14 +78,14 @@ mod pf; // t27c gen-rust of specs/tri/preflight/preflight.t27: the push prefligh
 #[path = "../../../gen/rust/tools/t27o/spice_convert.rs"] #[allow(dead_code, unused_parens, unused_mut, unused_variables, non_snake_case, unused_assignments, clippy::all)] mod spice; // t27c gen-rust of specs/tools/t27o/spice_convert.t27: the SPICE front end of `tri t27o` (#10509)
 #[path = "../../../gen/rust/tools/t27o/zig_convert.rs"] #[allow(dead_code, unused_parens, unused_mut, unused_variables, non_snake_case, unused_assignments, clippy::all)] mod zig; // t27c gen-rust of specs/tools/t27o/zig_convert.t27: the Zig front end of `tri t27o` (#10765)
 #[path = "../../../gen/rust/tri/renum/renum.rs"] #[allow(dead_code, unused_parens)] mod renum_rules; mod renum; // t27c gen-rust + thin I/O glue
-mod reseal;
+#[path = "../../../gen/rust/tri/reseal/seal.rs"] #[allow(dead_code, unused_parens)] mod reseal_rules; mod reseal; // t27c gen-rust of specs/tools/tri/reseal.t27
 #[path = "../../../gen/rust/tri/rtl/rtl.rs"] #[allow(dead_code, unused_parens)] mod rtl_rules; mod rtl; // t27c gen-rust + thin I/O glue
 mod scratch;
 #[path = "../../../gen/rust/tri/seals/seals.rs"] #[allow(dead_code, unused_parens)] mod seals_rules; mod seals; // t27c gen-rust + thin I/O glue
 mod skillnum;
 #[path = "../../../gen/rust/tri/sweep/sweep.rs"] #[allow(dead_code, unused_parens)] mod sweep_rules; mod sweep; // t27c gen-rust + thin I/O glue
 #[path = "../../../gen/rust/tri/synth/synth.rs"] #[allow(dead_code, unused_parens)] mod synth_rules; mod synth; // t27c gen-rust + thin I/O glue
-mod topic;
+#[path = "../../../gen/rust/tri/topic/topic.rs"] #[allow(dead_code, unused_parens)] mod topic_rules; mod topic; // t27c gen-rust of specs/tools/tri/topic.t27
 mod trees;
 mod types_dup;
 #[path = "../../../gen/rust/tri/unparsed/unparsed.rs"] #[allow(dead_code, unused_parens)] mod unparsed_rules; mod unparsed; // t27c gen-rust of specs/tools/tri/unparsed.t27

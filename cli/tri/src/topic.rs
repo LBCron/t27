@@ -1,6 +1,8 @@
 use anyhow::{bail, Result};
 use std::path::Path;
 use std::process::Command;
+#[allow(dead_code, unused_parens)]
+pub use crate::topic_rules::*;
 
 pub struct Row {
     pub origin: &'static str,
@@ -162,7 +164,6 @@ pub fn run(keywords: &[String], commits: usize) -> Result<()> {
     for line in issue_lines {
         rows.push(Row { origin: "open issue", label: line.clone(), hits: hits(&line, keywords) });
     }
-
     let log = Command::new("git")
         .args(["log", "origin/master", "--oneline", "-n", &commits.to_string()])
         .current_dir(&root)
@@ -217,7 +218,6 @@ pub fn run(keywords: &[String], commits: usize) -> Result<()> {
     println!();
     Ok(())
 }
-
 #[cfg(test)]
 mod tests {
     use super::*;
