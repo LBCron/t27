@@ -19,13 +19,13 @@
 //! The distinction that matters is between a tree that holds nothing and a tree this
 //! command could not read. They are printed differently, always. A census that fuses its
 //! own blindness with a finding will always find something.
-
 use anyhow::{Context, Result};
 use clap::Args;
 use std::process::Command;
+#[allow(dead_code, unused_parens)]
+pub use crate::trees_rules::*;
 #[path = "../../../gen/rust/tri/worktrees/reap.rs"] #[allow(dead_code, unused_parens)]
 mod reap; // t27c gen-rust of specs/tri/worktrees/reap.t27: every rule of `--reap-plan`
-
 /// One checkout, as `git worktree list --porcelain` describes it.
 #[derive(Debug, PartialEq, Eq, Default)]
 pub struct Tree {

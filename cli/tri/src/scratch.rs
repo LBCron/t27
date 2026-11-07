@@ -40,16 +40,15 @@
 //!   * `src.len()` used for something that is not a path, e.g.
 //!     `String::with_capacity(src.len())` in `verilog_r_si_1.rs`. Grepping the
 //!     symptom rather than the construct convicts that file wrongly.
-
 use anyhow::Result;
 use std::path::{Path, PathBuf};
-
+#[allow(dead_code, unused_parens)]
+pub use crate::scratch_rules::*;
 pub struct Finding {
     pub file: PathBuf,
     pub tests: usize,
     pub key: String,
 }
-
 /// The per-call components that make a scratch path unique per invocation.
 const PER_CALL: [&str; 3] = ["AtomicUsize", "SystemTime", "thread::current"];
 

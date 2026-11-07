@@ -18,11 +18,11 @@
 //! `a/b/c.rs` or `a/b/c/mod.rs`, and `#[path]` and `include!` are edges too. A looser
 //! rule -- "is this stem named by any `mod` anywhere" -- hides real orphans behind a
 //! same-named module in an unrelated directory.
-
 use anyhow::Result;
 use std::collections::BTreeSet;
 use std::path::{Path, PathBuf};
-
+#[allow(dead_code, unused_parens)]
+pub use crate::modreach_rules::*;
 /// One edge out of a source file: the paths a declaration can resolve to.
 #[derive(Debug, PartialEq)]
 pub struct Edge {
