@@ -29,7 +29,10 @@ pub const AGENTS_DOC : str = "AGENTS.md";
 pub const ALPHABET : str = "docs/agents/AGENTS_ALPHABET.md";
 ; Key files as the alphabet lists them (paths and globs relative to the t27 root).
 ; Key files = where this domain really changes in the repo (14-day git history, #11275): fallback for any other spec.
-pub const KEY_FILES : [2]str = ["specs/", "specs/ar/*.t27"];
+; Letter S also owns the root-level standardization artefacts and the gen/ subdirectories
+; that no other letter claims, closing the G_UNOWNED gap for external/, root docs,
+; .claude/rules/ and gen/json/ (gen/rust/, gen/c/, gen/verilog/ belong to C).
+pub const KEY_FILES : [9]str = ["specs/", "specs/ar/*.t27", "external/", "CONTRIBUTING.md", "SECURITY.md", "OWNERS.md", "TASK.md", ".claude/rules/", "gen/json/"];
 pub const ENTRY_INVARIANT : str = "All specs have TDD (test/invariant/bench)";
 pub const EXIT_INVARIANT : str = "Standards are consistent, naming rules followed";
 ; AR role from the alphabet.
@@ -61,4 +64,11 @@ test agent_s_constants {
   assert AR_ROLE == "AR Spec Standards - defines and enforces AR spec conventions";
   assert KEY_FILES[0] == "specs/";
   assert KEY_FILES[1] == "specs/ar/*.t27";
+  assert KEY_FILES[2] == "external/";
+  assert KEY_FILES[3] == "CONTRIBUTING.md";
+  assert KEY_FILES[4] == "SECURITY.md";
+  assert KEY_FILES[5] == "OWNERS.md";
+  assert KEY_FILES[6] == "TASK.md";
+  assert KEY_FILES[7] == ".claude/rules/";
+  assert KEY_FILES[8] == "gen/json/";
 }

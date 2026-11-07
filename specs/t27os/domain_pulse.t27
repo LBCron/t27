@@ -622,6 +622,26 @@ test path_letter_known {
     assert kind_of_path("specs/t27os/bench.t27") == K_PREFIX;
     assert letter_of_path("nothing/here.txt") == 0;
     assert letter_of_path("") == 0;
+    // Letter S (19) owns the root-level standardization artefacts and the
+    // gen/ subdirectories no other letter claims, closing the G_UNOWNED gap.
+    assert letter_of_path("external/opencode/x.js") == 19;
+    assert kind_of_path("external/opencode/x.js") == K_PREFIX;
+    assert letter_of_path("CONTRIBUTING.md") == 19;
+    assert kind_of_path("CONTRIBUTING.md") == K_EXACT;
+    assert letter_of_path("SECURITY.md") == 19;
+    assert kind_of_path("SECURITY.md") == K_EXACT;
+    assert letter_of_path("OWNERS.md") == 19;
+    assert kind_of_path("OWNERS.md") == K_EXACT;
+    assert letter_of_path("TASK.md") == 19;
+    assert kind_of_path("TASK.md") == K_EXACT;
+    assert letter_of_path(".claude/rules/x.yaml") == 19;
+    assert kind_of_path(".claude/rules/x.yaml") == K_PREFIX;
+    assert letter_of_path("gen/json/x.json") == 19;
+    assert kind_of_path("gen/json/x.json") == K_PREFIX;
+    // C still owns gen/rust/ and gen/c/; K owns gen/verilog/.
+    assert letter_of_path("gen/rust/x.rs") == 3;
+    assert letter_of_path("gen/c/x.c") == 3;
+    assert letter_of_path("gen/verilog/x.v") == 11;
 }
 
 /// The 15 directories that changed most in 14 days of git history (git log origin/master --since=14.days
