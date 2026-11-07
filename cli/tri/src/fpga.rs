@@ -1,9 +1,10 @@
 use std::io::{BufRead, Read};
 use std::path::PathBuf;
-
 use anyhow::{anyhow, bail, Context, Result};
 use clap::Subcommand;
 use dlc10::{cfg_reg, ir, Dlc10, FlashOpts, StatBits, BSCAN_SPI_XC7A100T};
+#[allow(dead_code, unused_parens)]
+pub use crate::fpga_rules::*;
 
 #[derive(Subcommand, Debug)]
 pub enum FpgaCmd {
@@ -779,7 +780,6 @@ pub enum FpgaCmd {
         no_platform: bool,
     },
 }
-
 pub fn run(cmd: &FpgaCmd) -> Result<()> {
     match cmd {
         FpgaCmd::Idcode => idcode(),
