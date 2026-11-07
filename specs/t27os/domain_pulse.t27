@@ -608,6 +608,8 @@ test path_letter_known {
     assert letter_of_path("architecture/ADR-0001.md") == 1;
     assert kind_of_path("architecture/ADR-0001.md") == K_PREFIX;
     assert letter_of_path("architecture/ADR.md") == 0;
+    assert letter_of_path("docs/adr/ADR-009.md") == 1;
+    assert kind_of_path("docs/adr/ADR-009.md") == K_PREFIX;
     assert letter_of_path(".github/workflows/ci.yml") == 2;
     assert letter_of_path("specs/automation/x.t27") == 10;
     assert letter_of_path("scripts/x.py") == 2;
@@ -656,7 +658,7 @@ test path_labels {
 }
 
 test agents_by_use {
-    assert key_n(0) == 7;
+    assert key_n(0) == 8;
     assert key_n(26) == 2;
     assert key_at(0, 0) == "SOUL.md";
     assert domain_of(1) == "Architecture / ADR / SOUL";

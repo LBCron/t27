@@ -1,0 +1,97 @@
+// SPDX-License-Identifier: Apache-2.0
+; specs/t27os/agents/adr_index.t27 -- letter A's first instrument: an ADR index card
+; Letter A (Architecture / ADR / SOUL) has no widget, no surface and no pin.
+; This card lists the ADRs in docs/adr/ as the letter's first surface on the A console.
+; Closes the G_NO_INSTRUMENT gap for letter A.
+; ASCII only (L3), English only (LANG-EN).
+; phi^2 + 1/phi^2 = 3 | TRINITY
+
+module adr_index_card;
+
+use std::mem::bytes_eq;
+
+pub const KIND : str = "widget-card";
+pub const ID : str = "adr-index";
+pub const TITLE : str = "ADR index: architecture decisions of letter A";
+pub const DESCRIPTION : str = "Index of the Architecture Decision Records in docs/adr/: status, date and decision authority of each one. Letter A's first instrument.";
+pub const HOOK : str = "The ADRs are letter A's constitution in one index card.";
+pub const CATEGORY : str = "architecture";
+pub const READS_LOCAL_FILES : bool = true;
+pub const SENDS_NOTHING : bool = true;
+
+; --- Where the ADRs live ---------------------------------------------------------
+pub const K_ADR_DIR : str = "docs/adr/";
+pub const K_ADR_GLOB : str = "ADR-*.md";
+
+; --- The ADRs on disk, one line per ADR: "id title date authority status" -----
+; Measured from docs/adr/ on 2026-11-08 (the only ADR present).
+pub const K_ADR_COUNT : u8 = 1;
+pub const K_ADR_IDS : [1]str = ["ADR-009"];
+pub const K_ADR_TITLES : [1]str = ["Generic type application in type positions"];
+pub const K_ADR_DATES : [1]str = ["2026-08-22"];
+pub const K_ADR_AUTHORITY : [1]str = ["language owner"];
+pub const K_ADR_STATUSES : [1]str = ["Accepted"];
+
+; --- Words on the card -----------------------------------------------------------
+pub const SAY_HEADER : str = "Architecture Decision Records";
+pub const SAY_NONE : str = "No ADRs in docs/adr/.";
+pub const SAY_ID : str = "id";
+pub const SAY_TITLE : str = "title";
+pub const SAY_DATE : str = "date";
+pub const SAY_AUTHORITY : str = "decision authority";
+pub const SAY_STATUS : str = "status";
+pub const SAY_DIRECTORY : str = "docs/adr/ holds the ADRs; each file is one record.";
+
+; --- Counts ----------------------------------------------------------------------
+pub fn adr_count() -> u32 {
+    return K_ADR_COUNT as u32;
+}
+
+pub fn adr_id(i: u32) -> string {
+    if (i < K_ADR_COUNT as u32) { return K_ADR_IDS[i as usize]; }
+    return "";
+}
+
+pub fn adr_title(i: u32) -> string {
+    if (i < K_ADR_COUNT as u32) { return K_ADR_TITLES[i as usize]; }
+    return "";
+}
+
+pub fn adr_date(i: u32) -> string {
+    if (i < K_ADR_COUNT as u32) { return K_ADR_DATES[i as usize]; }
+    return "";
+}
+
+pub fn adr_authority(i: u32) -> string {
+    if (i < K_ADR_COUNT as u32) { return K_ADR_AUTHORITY[i as usize]; }
+    return "";
+}
+
+pub fn adr_status(i: u32) -> string {
+    if (i < K_ADR_COUNT as u32) { return K_ADR_STATUSES[i as usize]; }
+    return "";
+}
+
+test adr_index_has_one_record {
+    assert adr_count() == 1;
+    assert adr_id(0) == "ADR-009";
+    assert adr_title(0) == "Generic type application in type positions";
+    assert adr_date(0) == "2026-08-22";
+    assert adr_authority(0) == "language owner";
+    assert adr_status(0) == "Accepted";
+}
+
+test out_of_range_returns_empty {
+    assert adr_id(1) == "";
+    assert adr_title(1) == "";
+    assert adr_date(1) == "";
+    assert adr_authority(1) == "";
+    assert adr_status(1) == "";
+}
+
+test header_is_fixed {
+    assert SAY_HEADER == "Architecture Decision Records";
+    assert SAY_DIRECTORY == "docs/adr/ holds the ADRs; each file is one record.";
+}
+
+endmodule

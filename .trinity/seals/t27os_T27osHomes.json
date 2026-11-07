@@ -1,5 +1,5 @@
 {
-  "built_by": "t27c-bootstrap@0.5.2+1941409a6",
+  "built_by": "t27c-bootstrap@0.5.2+f1fb27891",
   "closure": [
     {
       "spec": "specs/t27f/petal_menu.t27",
@@ -11,16 +11,16 @@
     }
   ],
   "config": "gen=c,rust,verilog,zig;tests=zig",
-  "gen_hash_c": "sha256:c65029b4a29fdd332d1e0d5472e90c50be1bfe173da688e77d881d18e8c5805d",
-  "gen_hash_rust": "sha256:594f7e41bc3ea1df2702a3e3b1e0c9bee05a5b5842d3fe0778e404289fd5e311",
-  "gen_hash_verilog": "sha256:796d7ea7016f1aa30ac91ff6f011b6a1728cb25b1d4dfed6935d1dfb68663c8a",
-  "gen_hash_zig": "sha256:8d6a97487cece26773f6d4d8c946f6b6bd00aa1bbf1461a28df73b95a3211103",
+  "gen_hash_c": "sha256:db7e23a0b246725c879b4ff1edc7b77d9a7d902cd48ddbcaa5deb6266eb01ee7",
+  "gen_hash_rust": "sha256:6048e4130528cd0199756b195e7d1333c526c271b6c5e5a6c5cb039664d7fd37",
+  "gen_hash_verilog": "sha256:fe3225af26014adf993222c178f80350ff328327eabf8f1b07d345f3a39086a3",
+  "gen_hash_zig": "sha256:f1a2936bde783b31c81dfdafa689ad83c7627289a52af0be3d249a7595b430bd",
   "module": "T27osHomes",
   "ring": 12,
   "seal_schema": 2,
-  "sealed_at": "2026-11-01T10:28:04Z",
+  "sealed_at": "2026-11-07T19:26:44Z",
   "sealed_by": "t27c-bootstrap@0.5.2",
-  "spec_hash": "sha256:13c91e583c79a270b01bf765147a3661eba1093aec077f11d41266076df65926",
+  "spec_hash": "sha256:bd320902955131b49c7a4f6cf054792719cfc0d17a15658512e60a9dd11a9e22",
   "spec_path": "specs/t27os/homes.t27",
   "tests": {
     "failed": 0,

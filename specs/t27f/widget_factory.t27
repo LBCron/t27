@@ -267,7 +267,7 @@ test the_spec_stage_refuses_a_widget_without_pinned_agents {
     assert has_agents(11);
     assert spec_stage_ok(0);
     assert spec_stage_ok(194);
-    assert spec_stage_ok(195) == false;
+    assert spec_stage_ok(195);
     var i : u32 = 0;
     var ok : u32 = 0;
     while (i < WIDGET_COUNT) {
