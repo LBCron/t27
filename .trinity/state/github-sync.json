@@ -1,6 +1,6 @@
 {
   "repo": "gHashTag/t27",
-  "last_synced_at": "2026-04-06T12:00:00Z",
+  "last_synced_at": "2026-11-08T03:00:00Z",
   "epoch_01_milestone": {
     "title": "EPOCH-01-HARDEN",
     "number": 1,
@@ -21,10 +21,12 @@
     "protocol_doc": "docs/TASK_PROTOCOL.md",
     "workspace_file": "TASK.md"
   },
-  "open_ring_issues": [
+  "open_ring_issues": [],
+  "ring_issue_states": [
     {
       "number": 127,
       "ring": 32,
+      "state": "closed",
       "title": "Ring 032: TASK.md + canonical iteration schema (constitution Article TASK-MD)",
       "url": "https://github.com/gHashTag/t27/issues/127",
       "labels": ["ring", "harden"]
@@ -32,6 +34,7 @@
     {
       "number": 128,
       "ring": 33,
+      "state": "closed",
       "title": "Ring 033: ISSUE-GATE CI enforcement — block PRs without Closes #N",
       "url": "https://github.com/gHashTag/t27/issues/128",
       "labels": ["ring", "harden", "ci"]
@@ -39,6 +42,7 @@
     {
       "number": 129,
       "ring": 34,
+      "state": "closed",
       "title": "Ring 034: GoldenFloat benchmark spec — GF16 vs bfloat16 vs float16 NMSE",
       "url": "https://github.com/gHashTag/t27/issues/129",
       "labels": ["ring", "harden", "numeric", "benchmark"]
@@ -46,6 +50,7 @@
     {
       "number": 130,
       "ring": 35,
+      "state": "closed",
       "title": "Ring 035: TECHNOLOGY-TREE.md — formal ring dependency DAG to Ring 999",
       "url": "https://github.com/gHashTag/t27/issues/130",
       "labels": ["ring", "harden", "docs"]
@@ -53,6 +58,7 @@
     {
       "number": 131,
       "ring": 36,
+      "state": "closed",
       "title": "Ring 036: Seal coverage CI — block PRs with missing SHA-256 seals",
       "url": "https://github.com/gHashTag/t27/issues/131",
       "labels": ["ring", "harden", "ci"]
@@ -60,6 +66,7 @@
     {
       "number": 132,
       "ring": 37,
+      "state": "closed",
       "title": "Ring 037: SOUL.md parser enforcement — reject specs without test/invariant/bench",
       "url": "https://github.com/gHashTag/t27/issues/132",
       "labels": ["ring", "harden", "compiler"]
@@ -67,6 +74,7 @@
     {
       "number": 133,
       "ring": 38,
+      "state": "closed",
       "title": "Ring 038: conformance vector schema v2 — add phi_distance and verdict fields",
       "url": "https://github.com/gHashTag/t27/issues/133",
       "labels": ["ring", "harden", "conformance"]
@@ -74,6 +82,7 @@
     {
       "number": 134,
       "ring": 39,
+      "state": "closed",
       "title": "Ring 039: AR preparation plan checklist",
       "url": "https://github.com/gHashTag/t27/issues/134",
       "labels": ["ring", "harden", "ar"]
@@ -81,9 +90,58 @@
     {
       "number": 135,
       "ring": 40,
+      "state": "closed",
       "title": "Ring 040: AGENTS_ALPHABET.md — complete all 27 agent definitions",
       "url": "https://github.com/gHashTag/t27/issues/135",
       "labels": ["ring", "harden", "docs", "agents"]
+    },
+    {
+      "number": 136,
+      "ring": 41,
+      "state": "closed",
+      "title": "Ring 041",
+      "url": "https://github.com/gHashTag/t27/issues/136",
+      "labels": ["ring", "harden"]
+    },
+    {
+      "number": 137,
+      "ring": 42,
+      "state": "closed",
+      "title": "Ring 042",
+      "url": "https://github.com/gHashTag/t27/issues/137",
+      "labels": ["ring", "harden"]
+    },
+    {
+      "number": 138,
+      "ring": 43,
+      "state": "closed",
+      "title": "Ring 043",
+      "url": "https://github.com/gHashTag/t27/issues/138",
+      "labels": ["ring", "harden"]
+    },
+    {
+      "number": 139,
+      "ring": 44,
+      "state": "closed",
+      "title": "Ring 044",
+      "url": "https://github.com/gHashTag/t27/issues/139",
+      "labels": ["ring", "harden"]
+    },
+    {
+      "number": 140,
+      "ring": 45,
+      "state": "closed",
+      "title": "Ring 045",
+      "url": "https://github.com/gHashTag/t27/issues/140",
+      "labels": ["ring", "harden"]
+    },
+    {
+      "number": 142,
+      "ring": 46,
+      "state": "closed",
+      "title": "Ring 046",
+      "url": "https://github.com/gHashTag/t27/issues/142",
+      "labels": ["ring", "harden"]
     }
   ],
   "notes": [
