@@ -61,7 +61,7 @@ use queen::drain::EXIT_WAIT;
 use queen::drain::EXIT_SECONDS;
 
 /// The three conclusions a claw check posts, restated from claw/t27f_gate.t27 (lines 57-59) and pinned
-/// by an invariant below. Not imported: that card pulls in ci/affected.t27 and policy/own_language.t27,
+/// by an invariant below. Not imported: that card pulls in ci/affected.t27,
 /// which both declare KINDS, and the splice refuses the ambiguous name.
 pub const CONCL_SUCCESS : u8 = 0;
 pub const CONCL_NEUTRAL : u8 = 1;

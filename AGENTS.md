@@ -273,7 +273,7 @@ section only states the rules.
   instrument, a stale seal, a red check on a domain's path, an unowned path, a spec no widget
   shows -- turns it into an issue with the 4-heading shape, starts one agent in a PTY pane on a
   fresh lane worktree (Sonnet; at most three at once on an 8 GB Mac), and lands the result only
-  through the normal gates (`Closes #N`, tests, seals, Only t27, DRY). The decision rule is
+  through the normal gates (`Closes #N`, tests, seals, DRY). The decision rule is
   `specs/t27os/evolve.t27`. GOD MODE never does what CLAUDE.md "Proactivity" forbids
   (passwords, payments, secrets, public claims without a measurement, owner-only gate files);
   those become requests to the owner. Cmd+J, Escape or the switch stops it; every action is in
@@ -318,7 +318,7 @@ Each gate is a spec. Read the spec, not a summary of it.
 
 | Gate | Rule | What trips it |
 |---|---|---|
-| Only t27 / SHRINK | `specs/policy/own_language.t27` (section "Only t27" above) | a new foreign file, or more foreign lines added than deleted |
+
 | Issue shape | [`specs/policy/issue_shape.t27`](specs/policy/issue_shape.t27) | an issue without Boundary / Scenarios / Requirements / Criteria; it is closed as `shape-refused` |
 | PR budget | [`specs/policy/pr_budget.t27`](specs/policy/pr_budget.t27) | more than 20 open PRs per author; batch port waves per ring or crate |
 | Compiler preflight | [`specs/tri/pr/preflight.t27`](specs/tri/pr/preflight.t27) | a bee PR whose specs do not pass the compiler |
@@ -358,46 +358,6 @@ GitHub receives one batched push per window, never one per commit; a red batch i
 verdicts. The law is `specs/queen/golden_chain.t27` section 6; the practices, commands and traps are
 the skill `own-git-landing`.
 
-## Only t27 (owner hard rule, 2026-10-05)
-
-Owner's rule, 2026-10-05: no new commit or pull request may contain code in
-another language; the hooks must stop it. It binds people, bees and agents alike.
-
-- **Allowed:** `.t27` specs; files `t27c` generated under a generated root
-  (`gen/`, `bootstrap/gen/`, `bootstrap/src/memory/generated/`); prose and data
-  (`.md`, `.txt`, `.json`); and **deletions**.
-- **Denied:** adding a new hand-written file in any other language --
-  `.rs .py .ts .js .sh .zig .c .go .v .lean .yml .toml`, Dockerfile, Makefile and
-  the rest of the list in the spec.
-- **Allowed without the label since 2026-10-18:** editing a foreign file that
-  already exists (`bootstrap/src/compiler.rs`, `cli/t27b`, a workflow `.yml`).
-  Owner rule, 2026-10-18 (translated): the label is not for every pull request,
-  only for the most important files. The edit is still held by `check_budget()`:
-  at most 40 added foreign lines per file and 80 per pull request, and never more
-  added than deleted. No label lifts that.
-- **The rule is** `specs/policy/own_language.t27`; its `t27c gen-c` output
-  `gen/c/policy/own_language.c` runs in `lefthook.yml` (pre-commit, pre-push)
-  and in `.github/workflows/own-language.yml` on every pull request. Read the
-  spec for the exact list; do not copy it here.
-- **The only override** is the label `owner-approved-foreign`, and it is needed
-  only for the most important files: a new foreign file, and the gate itself
-  (the spec, its generated C, `lefthook.yml`, `.github/workflows/own-language.yml`,
-  `tools/policy/foreign-exceptions.txt`). It is applied only on the owner's
-  explicit approval, and the pull request body quotes that approval (in English,
-  with its date and where it was given).
-- **Owner-approved exceptions** live in `tools/policy/foreign-exceptions.txt`:
-  data, one path prefix per line, each under a comment naming the approval. On
-  an approved branch, add the entry in the same branch; the local hooks read the
-  working-tree list, so the commit goes through. CI reads the list from the pull
-  request's base, and any change to the list file needs the owner's label, so
-  every entry on master was approved by the owner. There is no env-var bypass.
-- **Existing foreign code is debt** that only shrinks: by deletion, or by
-  replacing it with a spec and its generated output.
-- **`--no-verify` is forbidden**, and so is `LEFTHOOK=0`. Install the hooks
-  once per clone with `lefthook install`.
-- What gen cannot express yet is a compiler defect: file it on the self-host
-  epic (#5980) instead of writing the code by hand.
-
 ## t27b is written in t27
 
 Owner's rule, 2026-10-05: t27b -- the native backend -- and the tools that
@@ -408,10 +368,7 @@ measure it are written in **t27**, not in Rust or Python by hand.
   file is never hand-edited (L2).
 - What gen cannot express yet is a defect of the self-host work (#5980): file
   it there. Do not work around it in a hand-written file.
-- A new hand-written file is denied by the gate in "Only t27" above unless the
-  owner labels the pull request `owner-approved-foreign`; an edit to an existing
-  one passes within the budget. Either way the PR names the spec that will
-  replace it and links the port epic #6198.
+- A new hand-written file is denied unless the owner approves; an edit to an existing one passes within the budget. Either way the PR names the spec that will replace it and links the port epic #6198.
 - The debt only shrinks, and the gate enforces it: since #8236 `check_budget()` refuses
   any pull request that adds more hand-written foreign lines than it deletes. On
   2026-10-10 (master 1a7c8b939, `wc -l`) it is `cli/t27b/src/**/*.rs` 15627 lines and

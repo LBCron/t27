@@ -21,7 +21,7 @@ pub const DOMAIN_SPECS : u8 = 2;
 pub const DOMAIN_QUEEN_OPS : u8 = 3;
 
 /// The path prefixes of each domain. Each list is comma-separated and ends in '$', and is walked byte
-/// by byte as in specs/policy/own_language.t27. The order of the checks in domain_of_path matters: the
+/// by byte. The order of the checks in domain_of_path matters: the
 /// C backend's sources sit under bootstrap/, which is otherwise the compiler's.
 pub const PREFIXES_T27C : str = "gen/c/,specs/isa/,specs/asm/,bootstrap/src/codegen_c,$";
 pub const PREFIXES_T27B : str = "cli/t27b/,specs/tri/t27b/,bootstrap/,$";

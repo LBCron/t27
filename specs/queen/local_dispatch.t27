@@ -2,7 +2,7 @@
 // specs/queen/local_dispatch.t27 -- the local Queen's dispatch (t27#11420).
 // Pure logic only: issue scoring, claim-ref naming, lane naming. The I/O
 // (GitHub API, pane spawn) stays in the binding layer (cli/tri/src/) at <=40
-// lines, per the own-language rule.
+// lines.
 // phi^2 + 1/phi^2 = 3 | TRINITY
 
 module QueenLocalDispatch;

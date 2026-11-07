@@ -45,7 +45,6 @@
 
 module ClawT27fGate;
 
-use policy::own_language;
 use policy::text_lines;
 use ci::affected;
 use t27f::hot;

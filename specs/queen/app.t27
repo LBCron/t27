@@ -146,7 +146,7 @@ pub const C_PAUSE : u8 = 4;
 pub const C_RESUME : u8 = 5;
 
 /// The mention a command follows, and the command words, as '$'-terminated comma lists walked byte by
-/// byte (specs/policy/own_language.t27). Index in COMMAND_WORDS + 1 = the command code.
+/// byte. Index in COMMAND_WORDS + 1 = the command code.
 pub const MENTION : str = "@t27-bees$";
 pub const COMMAND_WORDS : str = "review,summary,help,pause,resume,$";
 pub const LIST_END : u8 = 36;

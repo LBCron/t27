@@ -5,7 +5,7 @@ module git_commands {
     using skill_registry: @import("../skill/registry.t27");
 
     // Host externs provided by the binding layer (cli/tri/src/git.rs). Declared
-    // here so the spec compiles and seals as .t27 (own-language rule); the
+    // here so the spec compiles and seals as .t27; the
     // binding layer supplies the real implementations at runtime.
     fn file_exists(path: []const u8) bool { undefined; }
     fn read_file(path: []const u8) ?[]const u8 { undefined; }

@@ -39,7 +39,6 @@
 module CiHeavySkip;
 
 use ci::affected;
-use policy::own_language;
 
 /// heavy_decision() answers.
 pub const HEAVY_RUN : u8 = 0;

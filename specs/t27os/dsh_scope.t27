@@ -18,10 +18,6 @@
 
 module T27osDshScope;
 
-use policy::own_language::classify;
-use policy::own_language::has_prefix;
-use policy::own_language::DENY;
-
 ; --- 1. modes, verdicts and reasons ------------------------------------------------------------------------
 
 /// The two modes. AUDIT logs and allows; BLOCK refuses.

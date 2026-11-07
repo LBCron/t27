@@ -46,8 +46,8 @@
 // above, no type information: it is a text normaliser, the same road as specs/tri/fmt_source.t27.
 // --
 // Imports, so a byte class and the bounded writer have one home each (a local copy of `put` would join a
-// duplicate group of its own): std::text (is_space, is_word, is_digit; epic row A) and
-// policy::own_language (put, put_range). Not for hardware specs until gHashTag/t27#8769 is closed.
+// duplicate group of its own): std::text (is_space, is_word, is_digit; epic row A).
+// Not for hardware specs until gHashTag/t27#8769 is closed.
 // Every private helper carries the dk_ prefix on purpose: the `use` splice keys declarations by bare name
 // and refuses two different bodies under one (R4), and word_end, str_end, span_eq, char_lit and the rest
 // already exist in this tree with other bodies. A spec that imports `normalise` must not collide.
@@ -58,9 +58,6 @@ module tools::dupes_key;
 use std::text::is_space;
 use std::text::is_word;
 use std::text::is_digit;
-use policy::own_language::put;
-use policy::own_language::put_range;
-
 /// The first byte of an identifier: a letter or '_' (a digit starts a number, not a name).
 fn dk_is_ident_start(c: u8) -> bool {
     return is_word(c) and is_digit(c) == false;

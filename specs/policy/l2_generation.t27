@@ -47,7 +47,6 @@
 module PolicyL2Generation;
 
 /// base_start, ext_dot, put, put_range, put_msg, LIST_END and LIST_SEP are the Only-t27 gate's.
-use policy::own_language;
 use policy::text_lines;
 
 /// Why a copy can, or cannot, be regenerated.

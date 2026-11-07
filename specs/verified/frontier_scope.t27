@@ -14,8 +14,8 @@
 ; gathers those three texts and hands them to select_affected, the way CI's C stub does (spec-guards.yml).
 ; --
 ; Why this module does not `use ci::affected`. The compiler cannot build a spec that imports it: affected.t27
-; declares its own in_list, ext_dot, KINDS and PROSE_EXTS and imports policy::own_language, which declares the
-; same four names differently, so the resolver reports them ambiguous and leaves them unspliced (t27c
+; declares its own in_list, ext_dot, KINDS and PROSE_EXTS, and splicing them here collides with the same four
+; names declared in this module, so the resolver reports them ambiguous and leaves them unspliced (t27c
 ; test-report: "BLOCKED does not compile ... use of undeclared identifier 'own_language'"). So the selection
 ; runs from affected's own generated code (bootstrap/gen/rust/ci/affected.rs), exactly as in CI, and this
 ; module holds the two decisions around it. The selection's own tests are in affected.t27.

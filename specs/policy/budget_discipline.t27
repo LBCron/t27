@@ -19,8 +19,6 @@
 
 module PolicyBudgetDiscipline;
 
-use policy::own_language;
-
 ; The gate's answer is the NUMBER of refusals, not a code: one per file over
 ; the 40 per-file cap, one when the counted files together pass 80 added, one
 ; when they gain more than they lose. 0 lets the commit through; a diff can

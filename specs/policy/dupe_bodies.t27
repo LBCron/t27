@@ -45,9 +45,6 @@ module policy::dupe_bodies;
 
 use std::text::is_word;
 use std::text::is_digit;
-use policy::own_language::put;
-use policy::own_language::put_range;
-use policy::own_language::put_msg;
 use tools::dupes_key::normalise_n;
 use verified::verdict_notes::put_u32;
 
