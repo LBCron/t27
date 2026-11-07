@@ -28,7 +28,7 @@ mod kinddrift;
 #[path = "../../../gen/rust/tri/leanvac/leanvac.rs"] #[allow(dead_code, unused_parens)] mod leanvac_rules; mod leanvac; // t27c gen-rust + thin I/O glue
 #[path = "../../../gen/rust/tri/ledgers/ledgers.rs"] #[allow(dead_code, unused_parens)] mod ledgers_rules; mod ledgers; // t27c gen-rust + thin I/O glue
 #[path = "../../../gen/rust/tri/loopclaim/loopclaim.rs"] #[allow(dead_code, unused_parens)] mod loopclaim_rules; mod loopclaim; // t27c gen-rust + thin I/O glue
-mod misread;
+#[path = "../../../gen/rust/tri/misread/misread.rs"] #[allow(dead_code, unused_parens)] mod misread_rules; mod misread; // t27c gen-rust of specs/tools/tri/misread.t27
 mod night;
 #[path = "../../../gen/rust/tri/oneaway/oneaway.rs"] #[allow(dead_code, unused_parens)] mod oneaway_rules; mod oneaway; // t27c gen-rust + thin I/O glue
 #[path = "../../../gen/rust/tri/network/payout.rs"] #[allow(dead_code, unused_parens)] mod payout_rules; mod payout; // t27c gen-rust of specs/verified/payout.t27

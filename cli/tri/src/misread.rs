@@ -4,6 +4,8 @@ use std::path::{Path, PathBuf};
 #[path = "../../../gen/rust/tri/misread/shapes.rs"] #[allow(dead_code, unused_parens)]
 mod ms; // t27c gen-rust of specs/tri/misread/shapes.t27: the five shapes, each anchored on the whole line
 use std::process::Command;
+#[allow(dead_code, unused_parens)]
+pub use crate::misread_rules::*;
 
 #[derive(Args, Debug)]
 pub struct Misread {
@@ -65,7 +67,6 @@ impl Shape {
         ]
     }
 }
-
 /// Apply every shape to one generated file, returning the ones present.
 pub fn shapes_in(text: &str, backend: &str) -> Vec<Shape> {
     let mut found = Vec::new();
@@ -86,7 +87,6 @@ pub fn shapes_in(text: &str, backend: &str) -> Vec<Shape> {
     }
     found
 }
-
 /// The spec whose whole purpose is to contain every shape this command claims to
 /// find. Since #6446 the backends refuse it -- `typecheck` refuses four of its
 /// shapes -- and that refusal is what the control now requires.
