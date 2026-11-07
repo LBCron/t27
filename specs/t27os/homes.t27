@@ -194,7 +194,7 @@ pub fn named_in(h: u32) -> u32 {
 ; home of every widget from there up to the next start. RUN_ANCHOR[r] is the id at that index, so a
 ; reader can find the run's start without the gallery open.
 
-pub const WIDGET_COUNT : u32 = 201;
+pub const WIDGET_COUNT : u32 = 202;
 pub const RUN_COUNT : u32 = 13;
 pub const RUN_START : [13]u32 = [0, 12, 13, 29, 31, 123, 126, 180, 185, 186, 187, 190, 191];
 pub const RUN_HOME : [13]u32 = [2, 5, 2, 5, 2, 5, 6, 2, 7, 2, 7, 2, 7];
@@ -780,7 +780,7 @@ test every_widget_has_exactly_one_home {
         total = total + widgets_in(h);
         h = h + 1;
     }
-    assert total == 201;
+    assert total == 202;
 }
 
 test the_widget_counts_per_home_are_pinned_and_recomputed {
@@ -791,7 +791,7 @@ test the_widget_counts_per_home_are_pinned_and_recomputed {
     assert widgets_in(H_T27O) == 0;
     assert widgets_in(H_T27T) == 6;
     assert widgets_in(H_T27U) == 54;
-    assert widgets_in(H_QUEEN) == 13;
+    assert widgets_in(H_QUEEN) == 14;
 }
 
 test the_anchor_indices_land_in_the_homes_the_evidence_gives {
@@ -823,7 +823,7 @@ test the_anchor_indices_land_in_the_homes_the_evidence_gives {
 }
 
 test negative_control_an_index_past_the_gallery_has_no_home {
-    assert home_of_widget(201) == HOME_COUNT;
+    assert home_of_widget(202) == HOME_COUNT;
     assert home_of_widget(4294967295) == HOME_COUNT;
     assert home_of_widget(194) != HOME_COUNT;
     assert widgets_in(HOME_COUNT) == 0;
@@ -871,7 +871,7 @@ test the_courses_that_own_their_lesson_widgets_are_in_t27u {
 }
 
 test six_widgets_are_opened_by_no_lesson {
-    assert widgets_without_course() == 12;
+    assert widgets_without_course() == 13;
     assert course_of_widget(187) == NO_COURSE;
     assert course_of_widget(94) == NO_COURSE;
     assert course_of_widget(66) == NO_COURSE;
