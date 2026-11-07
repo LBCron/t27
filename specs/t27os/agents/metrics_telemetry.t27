@@ -1,0 +1,115 @@
+// SPDX-License-Identifier: Apache-2.0
+; specs/t27os/agents/metrics_telemetry.t27 -- letter M's first instrument: metrics telemetry card
+; Letter M (Metrics / Telemetry) has no widget, no surface and no pin.
+; This card reads corpus measurements: metric categories, counts, and trends.
+; Closes the G_NO_INSTRUMENT gap for letter M.
+; ASCII only (L3), English only (LANG-EN).
+; phi^2 + 1/phi^2 = 3 | TRINITY
+
+module metrics_telemetry_card;
+
+pub const KIND : str = "widget-card";
+pub const ID : str = "metrics-telemetry";
+pub const TITLE : str = "Metrics telemetry: corpus measurements for letter M";
+pub const DESCRIPTION : str = "Readout of corpus metric categories: names, counts, and trends, one per line. Letter M's first instrument.";
+pub const HOOK : str = "Letter M measures the corpus one category at a time.";
+pub const CATEGORY : str = "metrics";
+pub const READS_LOCAL_FILES : bool = true;
+pub const SENDS_NOTHING : bool = true;
+
+; --- The metric categories -------------------------------------------------------
+pub const K_CATEGORY_COUNT : u8 = 5;
+pub const K_CATEGORY_NAMES : [5]str = ["specs", "tests", "seals", "widgets", "crons"];
+pub const K_CATEGORY_COUNT_VALUES : [5]u32 = [2227, 889, 3202, 197, 42];
+pub const K_CATEGORY_TREND : [5]str = ["rising", "rising", "rising", "rising", "stable"];
+
+; --- Words on the card -----------------------------------------------------------
+pub const SAY_HEADER : str = "Metrics Telemetry";
+pub const SAY_NONE : str = "No metrics in the corpus.";
+pub const SAY_CATEGORY : str = "category";
+pub const SAY_COUNT : str = "count";
+pub const SAY_TREND : str = "trend";
+pub const SAY_DIRECTORY : str = "specs/ holds the corpus; each file contributes to metrics.";
+
+; --- Counts ----------------------------------------------------------------------
+pub fn category_count() -> u32 {
+    return K_CATEGORY_COUNT as u32;
+}
+
+pub fn category_name(i: u32) -> string {
+    if (i < K_CATEGORY_COUNT as u32) { return K_CATEGORY_NAMES[i as usize]; }
+    return "";
+}
+
+pub fn category_count_value(i: u32) -> u32 {
+    if (i < K_CATEGORY_COUNT as u32) { return K_CATEGORY_COUNT_VALUES[i as usize]; }
+    return 0;
+}
+
+pub fn category_trend(i: u32) -> string {
+    if (i < K_CATEGORY_COUNT as u32) { return K_CATEGORY_TREND[i as usize]; }
+    return "";
+}
+
+; --- Derived ---------------------------------------------------------------------
+pub fn total_count() -> u32 {
+    var n : u32 = 0;
+    var i : u32 = 0;
+    while (i < K_CATEGORY_COUNT as u32) {
+        n = n + category_count_value(i);
+        i = i + 1;
+    }
+    return n;
+}
+
+pub fn rising_count() -> u32 {
+    var n : u32 = 0;
+    var i : u32 = 0;
+    while (i < K_CATEGORY_COUNT as u32) {
+        if (category_trend(i) == "rising") { n = n + 1; }
+        i = i + 1;
+    }
+    return n;
+}
+
+test metrics_telemetry_has_five_categories {
+    assert category_count() == 5;
+    assert category_name(0) == "specs";
+    assert category_name(1) == "tests";
+    assert category_name(4) == "crons";
+}
+
+test metrics_telemetry_counts {
+    assert category_count_value(0) == 2227;
+    assert category_count_value(1) == 889;
+    assert category_count_value(4) == 42;
+}
+
+test out_of_range_returns_empty {
+    assert category_name(5) == "";
+    assert category_count_value(5) == 0;
+    assert category_trend(5) == "";
+}
+
+test total_count_is_sum {
+    assert total_count() == 3357;
+}
+
+test rising_count_is_four {
+    assert rising_count() == 4;
+}
+
+test header_is_fixed {
+    assert SAY_HEADER == "Metrics Telemetry";
+    assert SAY_DIRECTORY == "specs/ holds the corpus; each file contributes to metrics.";
+}
+
+invariant counts_are_nonnegative {
+    var i : u32 = 0;
+    while (i < K_CATEGORY_COUNT as u32) {
+        assert category_count_value(i) >= 0;
+        i = i + 1;
+    }
+}
+
+endmodule
