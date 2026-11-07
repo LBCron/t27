@@ -1,15 +1,14 @@
 use anyhow::Result;
 use std::collections::{BTreeMap, BTreeSet};
 use std::path::{Path, PathBuf};
-
+#[allow(dead_code, unused_parens)]
+pub use crate::competitors_rules::*;
 /// The table this command reads. One file, named here rather than globbed: a
 /// glob would silently start reporting on a second table someone adds, and the
 /// ceilings below are calibrated against this one.
 const TABLE: &str = "specs/igla/coder/benchmark.t27";
-
 /// Where the four counts are pinned, so they can only go down.
 const RATCHET: &str = "docs/reports/competitor_table.json";
-
 #[derive(Debug, clap::Subcommand)]
 pub enum CompetitorsCmd {
     /// Count the records, the double-entered papers and the unpublished zeros.

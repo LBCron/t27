@@ -26,6 +26,8 @@ use anyhow::{bail, Context, Result};
 use clap::Subcommand;
 use std::path::{Path, PathBuf};
 use std::process::Command;
+#[allow(dead_code, unused_parens)]
+pub use crate::vectors_rules::*;
 
 #[derive(Subcommand)]
 pub enum VectorsCmd {
@@ -70,7 +72,6 @@ fn t27c(root: &Path) -> Result<PathBuf> {
     }
     Ok(p)
 }
-
 fn run_module(module: &str, keep: bool) -> Result<()> {
     let root = repo_root()?;
     let spec = root.join(format!("specs/fpga/{}.t27", module));
@@ -196,7 +197,6 @@ fn debt() -> Result<()> {
     );
     Ok(())
 }
-
 /// Count cases and how many carry any field beyond prose metadata.
 ///
 /// String-aware by construction. The first version split objects on ',' and was

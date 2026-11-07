@@ -2,6 +2,8 @@ use anyhow::{Context, Result};
 use std::collections::BTreeMap;
 use std::path::Path;
 use std::process::Command;
+#[allow(dead_code, unused_parens)]
+pub use crate::issues_rules::*;
 
 #[derive(Debug, clap::Subcommand)]
 pub enum IssuesCmd {
@@ -48,7 +50,6 @@ pub enum IssuesCmd {
         as_of: Option<String>,
     },
 }
-
 /// The phrases a title uses to call something red.
 ///
 /// Matched against the TITLE only. A body may mention redness in passing --
@@ -78,7 +79,6 @@ pub fn claims_red(title: &str) -> bool {
     // "has been red for three days", "red for 3 days"
     t.contains("red for ") && t.contains("day")
 }
-
 /// Every name a workflow answers to, mapped back to its file.
 ///
 /// Three keys per workflow, and the third is the one that matters: issues name

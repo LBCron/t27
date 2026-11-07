@@ -1,4 +1,6 @@
 use std::{fs,process::Command};
+#[allow(dead_code, unused_parens)]
+pub use crate::git_rules::*;
 pub fn run(cmd:&crate::GitAction)->anyhow::Result<i32>{
  let root=crate::find_trinity_root()?;
  match cmd {

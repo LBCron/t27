@@ -42,6 +42,8 @@
 use anyhow::{Context, Result};
 use clap::Subcommand;
 use std::path::PathBuf;
+#[allow(dead_code, unused_parens)]
+pub use crate::abandoned_rules::*;
 
 #[derive(Subcommand)]
 pub enum AbandonedCmd {
@@ -55,7 +57,6 @@ pub enum AbandonedCmd {
         full: bool,
     },
 }
-
 /// The calls that DISCARD input. `skip_brace_body` is deliberately absent: it is
 /// called to consume a body the caller has already decided to skip, so its own
 /// site never carries the decision.
@@ -64,7 +65,6 @@ const RECOVERIES: [&str; 3] = [
     "restore_bdd_fallback(",
     "recover_to_stmt_boundary(",
 ];
-
 /// The t27 keywords. A backticked quote is a T27 SHAPE only if one of these
 /// appears in it as a whole word.
 ///

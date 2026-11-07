@@ -17,6 +17,8 @@ mod plant; // of specs/tri/mutate/plant.t27 (#7369): every decision of `mutate p
 #[path = "../../../gen/rust/tri/mutate/clock.rs"] #[allow(dead_code, unused_parens)] mod clock; // of specs/tri/mutate/clock.t27 (#12345): first-pass clock, reruns
 #[path = "../../../gen/rust/tri/mutate/answer.rs"] #[allow(dead_code, unused_parens)] mod answer; // of specs/tri/mutate/answer.t27 (#12539): how a failed compile is read, which answers are asked again
 use std::sync::atomic::{AtomicU32, Ordering::SeqCst};
+#[allow(dead_code, unused_parens)]
+pub use crate::mutate_rules::*;
 
 #[derive(Subcommand)]
 pub enum MutateCmd {
@@ -87,7 +89,6 @@ pub enum MutateCmd {
         pass: Vec<String>,
     },
 }
-
 pub fn run(cmd: &MutateCmd) -> Result<()> {
     match cmd {
         MutateCmd::Run { file, cmd, max } => mutate(Path::new(file), cmd, *max),
@@ -151,7 +152,6 @@ pub fn run(cmd: &MutateCmd) -> Result<()> {
         }
     }
 }
-
 /// Make the file recoverable before touching it, and say where the copy is.
 ///
 /// The earlier version of this refused to run unless git said the file was

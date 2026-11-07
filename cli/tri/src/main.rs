@@ -7,10 +7,10 @@ use std::fs;
 use std::path::{Path, PathBuf};
 use std::process::Command;
 
-mod abandoned;
+#[path = "../../../gen/rust/tri/abandoned/abandoned.rs"] #[allow(dead_code, unused_parens)] mod abandoned_rules; mod abandoned; // t27c gen-rust of specs/tools/tri/abandoned.t27
 #[path = "../../../gen/rust/tri/mutate/census.rs"] #[allow(dead_code, unused_parens)] mod census_rules; mod census; // t27c gen-rust of specs/tri/mutate/census.t27
 mod cibase;
-mod competitors;
+#[path = "../../../gen/rust/tri/competitors/competitors.rs"] #[allow(dead_code, unused_parens)] mod competitors_rules; mod competitors; // t27c gen-rust of specs/tools/tri/competitors.t27
 mod depin;
 #[path = "../../../gen/rust/tri/discard/discard.rs"] #[allow(dead_code, unused_parens)] mod discard_rules; mod discard; // t27c gen-rust + thin I/O glue
 #[path = "../../../gen/rust/tri/elab/elab.rs"] #[allow(dead_code, unused_parens)] mod elab_rules; mod elab; // t27c gen-rust + thin I/O glue
@@ -19,9 +19,9 @@ mod depin;
 #[path = "../../../gen/rust/tri/fpga/fpga.rs"] #[allow(dead_code, unused_parens)] mod fpga_rules; mod fpga; // t27c gen-rust of specs/tools/tri/fpga.t27
 #[path = "../../../gen/rust/tri/gates/gates.rs"] #[allow(dead_code, unused_parens)] mod gates_rules; mod gates; // t27c gen-rust of specs/tools/tri/gates.t27
 #[path = "../../../gen/rust/tri/gendet/gendet.rs"] #[allow(dead_code, unused_parens)] mod gendet_rules; mod gendet; // t27c gen-rust + thin I/O glue
-mod hooks;
+#[path = "../../../gen/rust/tri/hooks/hooks.rs"] #[allow(dead_code, unused_parens)] mod hooks_rules; mod hooks; // t27c gen-rust of specs/tools/tri/hooks.t27
 mod inflight;
-mod issues;
+#[path = "../../../gen/rust/tri/issues/issues.rs"] #[allow(dead_code, unused_parens)] mod issues_rules; mod issues; // t27c gen-rust of specs/tools/tri/issues.t27
 #[path = "../../../gen/rust/tri/jumps/jumps.rs"] #[allow(dead_code, unused_parens)] mod jumps_rules; mod jumps; // t27c gen-rust + thin I/O glue
 mod kinddrift;
 #[path = "../../../gen/rust/tri/leanreach/leanreach.rs"] #[allow(dead_code, unused_parens)] mod leanreach_rules; mod leanreach; // t27c gen-rust + thin I/O glue
@@ -34,14 +34,14 @@ mod night;
 #[path = "../../../gen/rust/tri/network/payout.rs"] #[allow(dead_code, unused_parens)] mod payout_rules; mod payout; // t27c gen-rust of specs/verified/payout.t27
 mod window;
 mod modreach;
-mod mutate;
+#[path = "../../../gen/rust/tri/mutate/mutate.rs"] #[allow(dead_code, unused_parens)] mod mutate_rules; mod mutate; // t27c gen-rust of specs/tools/tri/mutate.t27
 #[path = "../../../gen/rust/tri/nownote/nownote.rs"] #[allow(dead_code, unused_parens)] mod nownote_rules; mod nownote; // t27c gen-rust + thin I/O glue
 #[path = "../../../gen/rust/tri/orphaned/orphaned.rs"] #[allow(dead_code, unused_parens)] mod orphaned_rules; mod orphaned; // t27c gen-rust + thin I/O glue
 #[path = "../../../gen/rust/tri/piddir/piddir.rs"] #[allow(dead_code, unused_parens)] mod piddir_rules; mod piddir; // t27c gen-rust + thin I/O glue
 mod prcheck;
 #[path = "../../../gen/rust/tri/prose/prose.rs"] #[allow(dead_code, unused_parens)] mod prose_rules; mod prose; // t27c gen-rust + thin I/O glue
 mod quant;
-mod git;
+#[path = "../../../gen/rust/tri/git/git.rs"] #[allow(dead_code, unused_parens)] mod git_rules; mod git; // t27c gen-rust of specs/tools/tri/git.t27
 #[path = "../../../gen/rust/tri/red/red.rs"] #[allow(dead_code, unused_parens)] mod red_rules; mod red; // t27c gen-rust + thin I/O glue
 #[path = "../../../gen/rust/tri/test/report.rs"] #[allow(dead_code, unused_parens)]
 mod report; // t27c gen-rust of specs/tri/test/report.t27 (#7369): every rule of reading `t27c test-report`
@@ -89,8 +89,8 @@ mod topic;
 mod trees;
 mod types_dup;
 #[path = "../../../gen/rust/tri/unparsed/unparsed.rs"] #[allow(dead_code, unused_parens)] mod unparsed_rules; mod unparsed; // t27c gen-rust of specs/tools/tri/unparsed.t27
-mod vectors;
-mod vsim;
+#[path = "../../../gen/rust/tri/vectors/vectors.rs"] #[allow(dead_code, unused_parens)] mod vectors_rules; mod vectors; // t27c gen-rust of specs/tools/tri/vectors.t27
+#[path = "../../../gen/rust/tri/vsim/vsim.rs"] #[allow(dead_code, unused_parens)] mod vsim_rules; mod vsim; // t27c gen-rust of specs/tools/tri/vsim.t27
 
 #[derive(Parser)]
 #[command(name = "tri", about = "PHI LOOP CLI wrapper")]

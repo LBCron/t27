@@ -1,10 +1,11 @@
 use std::path::{Path, PathBuf};
 use std::process::Command;
-
 use anyhow::{anyhow, bail, Context, Result};
 use chrono::Utc;
 use clap::Subcommand;
 use regex::Regex;
+#[allow(dead_code, unused_parens)]
+pub use crate::hooks_rules::*;
 
 #[derive(Subcommand, Debug)]
 pub enum HooksCmd {
@@ -1090,7 +1091,6 @@ fn fix_carries_source_self_check() -> Result<()> {
     }
 }
 
-
 /// The push-time half of the NOW gate: does this range ADD an entry? Asked on request
 /// only; `.githooks/pre-push` stopped calling it in #5935.
 fn pre_push(base: Option<&str>) -> Result<()> {
@@ -1174,7 +1174,6 @@ fn rev(root: &std::path::Path, r: &str) -> Option<String> {
     let s = String::from_utf8_lossy(&out.stdout).trim().to_string();
     if s.is_empty() { None } else { Some(s) }
 }
-
 
 /// L1 over the message being written.
 fn commit_msg(path: &std::path::Path) -> Result<()> {

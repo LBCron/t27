@@ -4,6 +4,8 @@ use std::collections::BTreeMap;
 use std::path::{Path, PathBuf};
 use std::process::Command;
 
+#[allow(dead_code, unused_parens)]
+pub use crate::vsim_rules::*;
 #[derive(Subcommand)]
 pub enum VsimCmd {
     /// Walk the corpus through `t27c icarus-simulate` and print the funnel.
@@ -35,7 +37,6 @@ enum Stage {
     /// would be an unmeasured state wearing a verdict (ci-gates 428).
     Unattributed,
 }
-
 impl Stage {
     fn label(self) -> &'static str {
         match self {
@@ -50,7 +51,6 @@ impl Stage {
         }
     }
 }
-
 pub fn run(cmd: &VsimCmd) -> Result<()> {
     match cmd {
         VsimCmd::Funnel { limit, timeout } => funnel(*limit, *timeout),
