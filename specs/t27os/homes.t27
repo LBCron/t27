@@ -871,7 +871,7 @@ test the_courses_that_own_their_lesson_widgets_are_in_t27u {
 }
 
 test six_widgets_are_opened_by_no_lesson {
-    assert widgets_without_course() == 15;
+    assert widgets_without_course() == 16;
     assert course_of_widget(187) == NO_COURSE;
     assert course_of_widget(94) == NO_COURSE;
     assert course_of_widget(66) == NO_COURSE;
