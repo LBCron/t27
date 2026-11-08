@@ -791,7 +791,7 @@ test the_widget_counts_per_home_are_pinned_and_recomputed {
     assert widgets_in(H_T27O) == 0;
     assert widgets_in(H_T27T) == 6;
     assert widgets_in(H_T27U) == 54;
-    assert widgets_in(H_QUEEN) == 17;
+    assert widgets_in(H_QUEEN) == 18;
 }
 
 test the_anchor_indices_land_in_the_homes_the_evidence_gives {
@@ -871,7 +871,7 @@ test the_courses_that_own_their_lesson_widgets_are_in_t27u {
 }
 
 test six_widgets_are_opened_by_no_lesson {
-    assert widgets_without_course() == 16;
+    assert widgets_without_course() == 17;
     assert course_of_widget(187) == NO_COURSE;
     assert course_of_widget(94) == NO_COURSE;
     assert course_of_widget(66) == NO_COURSE;
