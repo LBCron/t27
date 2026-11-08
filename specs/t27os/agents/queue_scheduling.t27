@@ -1,0 +1,103 @@
+// SPDX-License-Identifier: Apache-2.0
+; specs/t27os/agents/queue_scheduling.t27 -- widget card for letter Q (Queue / Scheduling).
+; Letter Q's first instrument: a readout of the wave loop queue states and their counts.
+; All numbers are computed by the spec itself.
+; ASCII only (L3), English only (LANG-EN).
+; phi^2 + 1/phi^2 = 3 | TRINITY
+
+module QueueSchedulingCard;
+
+pub const KIND : str = "widget-card";
+pub const ID : str = "queue-scheduling";
+pub const TITLE : str = "Queue scheduling: wave loop queue for letter Q";
+pub const DESCRIPTION : str = "Letter Q's first instrument: the wave loop queue states, queue by queue.";
+
+pub const QUEUE_COUNT : u32 = 5;
+
+/// How many queue states the widget card shows.
+pub fn queue_count() -> u32 {
+    return QUEUE_COUNT;
+}
+
+/// The name of queue state i (0..4), or "" past the end.
+pub fn queue_state(i: u32) -> str {
+    if (i == 0) { return "queued"; }
+    if (i == 1) { return "running"; }
+    if (i == 2) { return "blocked"; }
+    if (i == 3) { return "drained"; }
+    if (i == 4) { return "error"; }
+    return "";
+}
+
+/// Is queue state i a terminal state (drained or error)?
+pub fn queue_state_is_terminal(i: u32) -> bool {
+    if (i >= QUEUE_COUNT) { return false; }
+    return i == 3 || i == 4;
+}
+
+/// Is queue state i an active state (queued or running)?
+pub fn queue_state_is_active(i: u32) -> bool {
+    if (i >= QUEUE_COUNT) { return false; }
+    return i == 0 || i == 1;
+}
+
+/// The number of active queue states (queued + running = 2).
+pub fn active_queue_count() -> u32 {
+    return 2;
+}
+
+test widget_card_has_kind_and_id {
+    assert KIND == "widget-card";
+    assert ID == "queue-scheduling";
+}
+
+test widget_card_title_and_description_are_set {
+    assert TITLE.len > 0;
+    assert DESCRIPTION.len > 0;
+    assert TITLE == "Queue scheduling: wave loop queue for letter Q";
+}
+
+test queue_count_is_5 {
+    assert queue_count() == 5;
+    assert QUEUE_COUNT == 5;
+}
+
+test queue_states_cover_all_five {
+    assert queue_state(0) == "queued";
+    assert queue_state(1) == "running";
+    assert queue_state(2) == "blocked";
+    assert queue_state(3) == "drained";
+    assert queue_state(4) == "error";
+    assert queue_state(5) == "";
+}
+
+test only_drained_and_error_are_terminal {
+    assert queue_state_is_terminal(3);
+    assert queue_state_is_terminal(4);
+    assert !queue_state_is_terminal(0);
+    assert !queue_state_is_terminal(1);
+    assert !queue_state_is_terminal(2);
+}
+
+test queued_and_running_are_active {
+    assert queue_state_is_active(0);
+    assert queue_state_is_active(1);
+    assert !queue_state_is_active(2);
+    assert !queue_state_is_active(3);
+    assert !queue_state_is_active(4);
+}
+
+test active_queue_count_is_two {
+    assert active_queue_count() == 2;
+}
+
+invariant queue_count_constant {
+    assert QUEUE_COUNT == 5;
+}
+
+invariant queue_states_exist {
+    assert queue_state(0) == "queued";
+    assert queue_state(4) == "error";
+}
+
+endmodule
