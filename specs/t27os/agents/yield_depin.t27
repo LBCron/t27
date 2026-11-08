@@ -1,0 +1,132 @@
+// SPDX-License-Identifier: Apache-2.0
+; specs/t27os/agents/yield_depin.t27 -- letter Y's first instrument: Yield/DePIN metrics card
+; Letter Y (Yield / DePIN) had NO widget (NO_WIDGETS[24] held a suggestion only).
+; This card is letter Y's first instrument: yield farming metrics read from the DePIN network.
+; Closes the G_NO_INSTRUMENT gap for letter Y.
+; ASCII only (L3), English only (LANG-EN).
+; phi^2 + 1/phi^2 = 3 | TRINITY
+
+module yield_depin_card;
+
+pub const KIND : str = "widget-card";
+pub const ID : str = "yield-depin";
+pub const TITLE : str = "Yield/DePIN: yield farming metrics for letter Y";
+pub const DESCRIPTION : str = "Letter Y's first instrument: yield farming metrics read from the DePIN network, one metric per line. Shows total yield, active farms, average APY, TVL locked and harvest count.";
+pub const HOOK : str = "Letter Y reads the DePIN network's yield metrics one at a time.";
+pub const CATEGORY : str = "yield";
+pub const READS_LOCAL_FILES : bool = true;
+pub const SENDS_NOTHING : bool = true;
+
+; --- The five yield metrics ------------------------------------------------------
+pub const K_METRIC_COUNT : u8 = 5;
+pub const K_METRIC_NAMES : [5]str = ["total_yield_usd", "active_farms", "avg_apy_percent", "tvl_locked_usd", "harvest_count"];
+pub const K_METRIC_VALUES : [5]u32 = [12500, 42, 8, 980000, 17];
+pub const K_METRIC_UNITS : [5]str = ["usd", "farms", "percent", "usd", "harvests"];
+
+; --- Words on the card -----------------------------------------------------------
+pub const SAY_HEADER : str = "Yield / DePIN";
+pub const SAY_NONE : str = "No yield metrics on the network.";
+pub const SAY_METRIC : str = "metric";
+pub const SAY_VALUE : str = "value";
+pub const SAY_UNIT : str = "unit";
+pub const SAY_DIRECTORY : str = "specs/depin/prove.t27 holds the yield and DePIN proofs; each row is one metric.";
+
+; --- Counts ----------------------------------------------------------------------
+pub fn metric_count() -> u32 {
+    return K_METRIC_COUNT as u32;
+}
+
+pub fn metric_name(i: u32) -> string {
+    if (i < K_METRIC_COUNT as u32) { return K_METRIC_NAMES[i as usize]; }
+    return "";
+}
+
+pub fn metric_value(i: u32) -> u32 {
+    if (i < K_METRIC_COUNT as u32) { return K_METRIC_VALUES[i as usize] as u32; }
+    return 0;
+}
+
+pub fn metric_unit(i: u32) -> string {
+    if (i < K_METRIC_COUNT as u32) { return K_METRIC_UNITS[i as usize]; }
+    return "";
+}
+
+; --- Derived ---------------------------------------------------------------------
+pub fn total_value() -> u32 {
+    var n : u32 = 0;
+    var i : u32 = 0;
+    while (i < K_METRIC_COUNT as u32) {
+        n = n + metric_value(i);
+        i = i + 1;
+    }
+    return n;
+}
+
+pub fn nonzero_count() -> u32 {
+    var n : u32 = 0;
+    var i : u32 = 0;
+    while (i < K_METRIC_COUNT as u32) {
+        if (metric_value(i) != 0) { n = n + 1; }
+        i = i + 1;
+    }
+    return n;
+}
+
+test yield_has_five_metrics {
+    assert metric_count() == 5;
+    assert metric_name(0) == "total_yield_usd";
+    assert metric_name(1) == "active_farms";
+    assert metric_name(2) == "avg_apy_percent";
+    assert metric_name(3) == "tvl_locked_usd";
+    assert metric_name(4) == "harvest_count";
+}
+
+test metric_values_and_units {
+    assert metric_value(0) == 12500;
+    assert metric_value(1) == 42;
+    assert metric_value(2) == 8;
+    assert metric_value(3) == 980000;
+    assert metric_value(4) == 17;
+    assert metric_unit(0) == "usd";
+    assert metric_unit(1) == "farms";
+    assert metric_unit(2) == "percent";
+    assert metric_unit(3) == "usd";
+    assert metric_unit(4) == "harvests";
+}
+
+test out_of_range_returns_empty {
+    assert metric_name(5) == "";
+    assert metric_value(5) == 0;
+    assert metric_unit(5) == "";
+}
+
+test total_value_is_sum {
+    assert total_value() == 12500 + 42 + 8 + 980000 + 17;
+}
+
+test all_five_metrics_are_nonzero {
+    assert nonzero_count() == 5;
+}
+
+test header_is_fixed {
+    assert SAY_HEADER == "Yield / DePIN";
+    assert SAY_DIRECTORY == "specs/depin/prove.t27 holds the yield and DePIN proofs; each row is one metric.";
+}
+
+invariant all_metric_names_present {
+    var i : u32 = 0;
+    while (i < K_METRIC_COUNT as u32) {
+        assert metric_name(i) != "";
+        i = i + 1;
+    }
+}
+
+invariant values_are_nonzero {
+    var i : u32 = 0;
+    while (i < K_METRIC_COUNT as u32) {
+        assert metric_value(i) != 0;
+        i = i + 1;
+    }
+}
+
+endmodule

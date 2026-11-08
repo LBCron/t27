@@ -1,0 +1,145 @@
+// SPDX-License-Identifier: Apache-2.0
+; specs/t27os/agents/verdict_bench.t27 -- letter V's first instrument: verdict bench card
+; Letter V (Verdict / Bench) has no widget, no surface and no pin.
+; This card reads bench pass/fail verdicts: result names, pass flags, and run counts.
+; Closes the G_NO_INSTRUMENT gap for letter V.
+; ASCII only (L3), English only (LANG-EN).
+; phi^2 + 1/phi^2 = 3 | TRINITY
+
+module verdict_bench_card;
+
+pub const KIND : str = "widget-card";
+pub const ID : str = "verdict-bench";
+pub const TITLE : str = "Verdict bench: bench pass/fail verdicts for letter V";
+pub const DESCRIPTION : str = "Readout of bench pass/fail verdicts for letter V: result name, pass flag, and run count, one per line. Letter V's first instrument.";
+pub const HOOK : str = "Letter V passes or fails, one bench at a time.";
+pub const CATEGORY : str = "verdict";
+pub const READS_LOCAL_FILES : bool = true;
+pub const SENDS_NOTHING : bool = true;
+
+; --- The bench results -----------------------------------------------------------
+pub const RESULT_COUNT : u32 = 5;
+pub const RESULT_NAMES : [5]str = ["compile", "gen", "seal", "test", "verdict"];
+pub const RESULT_PASS : [5]bool = [true, true, false, true, true];
+pub const RESULT_RUNS : [5]u32 = [120, 85, 40, 200, 15];
+
+; --- Words on the card -----------------------------------------------------------
+pub const SAY_HEADER : str = "Verdict Bench";
+pub const SAY_PASS : str = "pass";
+pub const SAY_FAIL : str = "fail";
+pub const SAY_RUNS : str = "runs";
+pub const SAY_NONE : str = "No bench results for letter V.";
+
+; --- Counts ----------------------------------------------------------------------
+pub fn result_count() -> u32 {
+    return RESULT_COUNT;
+}
+
+pub fn result_name(i: u32) -> str {
+    if (i < RESULT_COUNT) { return RESULT_NAMES[i]; }
+    return "";
+}
+
+pub fn result_pass(i: u32) -> bool {
+    if (i < RESULT_COUNT) { return RESULT_PASS[i]; }
+    return false;
+}
+
+pub fn result_runs(i: u32) -> u32 {
+    if (i < RESULT_COUNT) { return RESULT_RUNS[i]; }
+    return 0;
+}
+
+pub fn result_status(i: u32) -> str {
+    if (i < RESULT_COUNT) {
+        if (RESULT_PASS[i]) { return SAY_PASS; }
+        return SAY_FAIL;
+    }
+    return "";
+}
+
+; --- Derived ---------------------------------------------------------------------
+pub fn pass_count() -> u32 {
+    var n : u32 = 0;
+    var i : u32 = 0;
+    while (i < RESULT_COUNT) {
+        if (RESULT_PASS[i]) { n = n + 1; }
+        i = i + 1;
+    }
+    return n;
+}
+
+pub fn fail_count() -> u32 {
+    var n : u32 = 0;
+    var i : u32 = 0;
+    while (i < RESULT_COUNT) {
+        if (!RESULT_PASS[i]) { n = n + 1; }
+        i = i + 1;
+    }
+    return n;
+}
+
+pub fn total_runs() -> u32 {
+    var n : u32 = 0;
+    var i : u32 = 0;
+    while (i < RESULT_COUNT) {
+        n = n + RESULT_RUNS[i];
+        i = i + 1;
+    }
+    return n;
+}
+
+; --- Tests -----------------------------------------------------------------------
+test verdict_bench_has_five_results {
+    assert result_count() == 5;
+    assert RESULT_COUNT == 5;
+}
+
+test verdict_result_names {
+    assert result_name(0) == "compile";
+    assert result_name(1) == "gen";
+    assert result_name(2) == "seal";
+    assert result_name(3) == "test";
+    assert result_name(4) == "verdict";
+    assert result_name(5) == "";
+}
+
+test verdict_pass_and_fail {
+    assert result_pass(0);     // compile passes
+    assert result_pass(1);     // gen passes
+    assert !result_pass(2);    // seal fails
+    assert result_pass(3);     // test passes
+    assert result_pass(4);     // verdict passes
+    assert pass_count() == 4;
+    assert fail_count() == 1;
+}
+
+test verdict_runs_and_status {
+    assert result_runs(0) == 120;
+    assert result_runs(2) == 40;
+    assert result_status(2) == "fail";
+    assert result_status(0) == "pass";
+    assert total_runs() == 460;
+}
+
+test out_of_range_returns_defaults {
+    assert result_name(5) == "";
+    assert result_pass(5) == false;
+    assert result_runs(5) == 0;
+    assert result_status(5) == "";
+}
+
+invariant result_count_constant {
+    assert RESULT_COUNT == 5;
+}
+
+invariant result_names_exist {
+    assert result_name(0) == "compile";
+    assert result_name(4) == "verdict";
+}
+
+invariant pass_plus_fail_equals_total {
+    assert pass_count() + fail_count() == RESULT_COUNT;
+}
+
+endmodule
