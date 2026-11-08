@@ -21,7 +21,7 @@ pub const SENDS_NOTHING : bool = true;
 pub const K_FORMAT_COUNT : u8 = 7;
 pub const K_FORMAT_NAMES : [7]str = ["GF4", "GF8", "GF16", "GF32", "GF64", "GF128", "GF256"];
 pub const K_FORMAT_BITS : [7]u32 = [4, 8, 16, 32, 64, 128, 256];
-pub const K_FORMAT_BIAS : [7]u8 = [3, 7, 31, 127, 1023, 16383, 65535];
+pub const K_FORMAT_BIAS : [7]u32 = [3, 7, 31, 127, 1023, 16383, 65535];
 
 ; --- Words on the card -----------------------------------------------------------
 pub const SAY_HEADER : str = "Numeric Format Family";
@@ -87,7 +87,7 @@ test out_of_range_returns_empty {
 }
 
 test total_bits_is_sum {
-    assert total_bits() == 510;
+    assert total_bits() == 508;
 }
 
 test has_bias_for_all {
